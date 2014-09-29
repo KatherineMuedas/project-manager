@@ -1,0 +1,22 @@
+%h1= @project.name
+%p= @project.description
+%h5 Due Date:
+%p= @project.due_date_at.strftime("%e %B %Y")
+%h3 Tasks:
+- @tasks.each do |task|
+  %p
+    %strong.task_name= task.name
+  %p
+    Created by: #{task.user.name}
+    %br/
+    Assign to: #{User.find(task.assign_to).name}
+  %p
+    Delivery Minutes: #{task.delivery_minutes}
+    %br/
+    Status: #{task.is_completed ? 'Complete' : 'Incomplete'}
+  %p
+    = simple_format(task.description, {class: 'task_description'}, sanitize: true)
+
+= link_to 'Home', root_path
+=link_to 'Edit Project', edit_project_path 
+=link_to 'Delete Project', @project, method: :delete,  data: { confirm: 'Are you sure you want to delete this project?'}
