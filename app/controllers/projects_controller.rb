@@ -5,13 +5,13 @@ class ProjectsController < ApplicationController
     @projects = Project.all.includes(:user) 
   end
 
-  def new
+  def new 
     @project = current_user.projects.new
     @project.tasks.build
   end
 
-  def create
-    @project = current_user.projects.new(project_params)
+  def create  
+    @project = current_user.projects.create(project_params)
     if @project.save
       redirect_to @project, notice: 'Project was successfully created.' 
     else
@@ -20,8 +20,6 @@ class ProjectsController < ApplicationController
   end
 
   def show
-    # @project = Project.find(params[:id])
-    # @tasks = @project.tasks
     @tasks = @project.tasks.includes(:user)
   end
 

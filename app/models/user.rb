@@ -5,4 +5,11 @@ class User < ActiveRecord::Base
   has_many :tasks, through: :projects
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable
+
+
+
+  # before_validation :sanitize_phone
+
+  validates :name, :phone, presence: true
+          
 end
