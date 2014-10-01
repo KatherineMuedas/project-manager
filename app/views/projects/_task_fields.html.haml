@@ -1,18 +1,24 @@
 .nested-fields
-.field.form-group
-  = f.input :name
-.field.form-group  
-  = f.input :description
-.field.form-group
-  = f.label :assign_to
-.field.form-group  
-  = f.collection_select :assign_to, User.all, :id, :name
-.field.form-group
-  = f.input :delivery_minutes
-.field.form-group 
-  = f.input :is_completed, as: :boolean
-.field.form-group  
+  .form-group.name.small-8.small-centered.columns
+    = f.input :name
+    %br/
+  .form-group.description.small-8.small-centered.columns 
+    = f.input :description
+    %br/
+  .form-group.assign_to.small-8.small-centered.columns
+    = f.label :assign_to
+  .form-group.collection.small-8.small-centered.columns  
+    = f.collection_select :assign_to, User.all, :id, :name
+    %br/
+  .form-group.delivery_minutes.small-8.small-centered.columns
+    = f.input :delivery_minutes
+    %br/
+  .form-group.is_completed.small-8.small-centered.columns
+    = f.input :is_completed, as: :boolean
+    %br/
+  .text-center 
 
-  = f.hidden_field :user_id, value: current_user.id if f.object.user_id.nil?
-  = link_to_remove_association "Remove task", f, class: "btn btn-danger" 
-%br/
+    = f.hidden_field :user_id, value: current_user.id if f.object.user_id.nil?
+    = link_to_remove_association "Remove task", f, class: "btn btn-danger" 
+  %br/
+

@@ -1,14 +1,19 @@
 .row
   %h1= @project.name
   %p= @project.description
-  %h5 Due Date:
+  %h5 Due Date:  
   %p= @project.due_date_at.strftime("%e %B %Y")
   %h3 Tasks:
   - @tasks.each do |task|
     %h4
       = task.name
+    %p 
+      Created by: #{task.user.name} 
+
     %p
-      Created by: #{task.user.name} | Assign to: #{User.find(task.assign_to).name} | Delivery Minutes: #{task.delivery_minutes} 
+      Assign to: #{User.find(task.assign_to).name}
+    %p 
+      Delivery Minutes: #{task.delivery_minutes} 
       %br/
       Status: #{task.is_completed ? 'Complete' : 'Incomplete'}
     %p

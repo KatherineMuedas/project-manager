@@ -11,7 +11,7 @@ class ProjectsController < ApplicationController
   end
 
   def create  
-    @project = current_user.projects.create(project_params)
+    @project = current_user.projects.new(project_params)
     if @project.save
       redirect_to @project, notice: 'Project was successfully created.' 
     else

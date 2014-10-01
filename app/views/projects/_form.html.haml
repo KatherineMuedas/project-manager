@@ -1,17 +1,21 @@
-= simple_form_for @project do |f|
-  = f.error_notification
-  .form-group
-    = f.input :name, label: 'Project Name: '
-  .form-group
-    = f.input :description, label: 'Project Description:', placeholder: 'least 10 characters', class: 'form-control', input_html: { rows: 10}
-  .form-group
-    = f.input :due_date_at, label: 'Project Due Date (in UTC):', minute_step: 15, default: 1.week.from_now, order: [:month, :day, :year], start_year: Time.now.year 
-  %h3 Tasks
-  #tasks
-    = f.simple_fields_for :tasks do |task|
-      = render 'task_fields', f: task
-    .links
-      = link_to_add_association 'add task', f, :tasks, class: 'btn btn-primary'
-  %p
-    = f.button :submit, 'Submit', class: 'btn btn-success'
-    = link_to 'Back', root_path, class: 'btn btn-default'
+.row 
+  = simple_form_for @project do |f|
+    = f.error_notification
+    .form-group.name.small-8.small-centered.columns
+      = f.input :name, label: 'Project Name: ' 
+      %br/
+    .form-group.name.small-8.small-centered.columns
+      = f.input :description, label: 'Project Description:', placeholder: 'least 10 characters', class: 'form-control', input_html: { rows: 10}
+      %br/
+    .form-group.name.small-8.small-centered.columns
+      = f.input :due_date_at, label: 'Project Due Date (in UTC):', minute_step: 15, default: 1.week.from_now, order: [:month, :day, :year], start_year: Time.now.year 
+      %br/
+    %h3.text-center Tasks
+    #tasks
+      = f.simple_fields_for :tasks do |task|
+        = render 'task_fields', f: task
+      .links
+        = link_to_add_association 'add task', f, :tasks, class: 'btn btn-primary'
+    %p
+      = f.button :submit, 'Submit', class: 'btn btn-success'
+      = link_to 'Back', root_path, class: 'btn btn-default'
