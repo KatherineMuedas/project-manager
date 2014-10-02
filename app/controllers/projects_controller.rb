@@ -8,6 +8,7 @@ class ProjectsController < ApplicationController
   def new 
     @project = current_user.projects.new
     @project.tasks.build
+    @project.project_members.build
   end
 
   def create  
@@ -21,6 +22,7 @@ class ProjectsController < ApplicationController
 
   def show
     @tasks = @project.tasks.includes(:user)
+    @project_members = @project.project_members.includes(:user)
   end
 
   def edit
@@ -46,8 +48,9 @@ class ProjectsController < ApplicationController
   end
 
   def project_params
+    project_members_attributes = [:id, :project_id, :user_id]
     tasks_attributes = [:id, :name, :description, :is_completed, :delivery_minutes, :assign_to, :project_id, :user_id, :_destroy]
-    params.require(:project).permit(:name, :description, :due_date_at, tasks_attributes: tasks_attributes)
+    params.require(:project).permit(:name, :description, :due_date_at, tasks_attributes: tasks_attributes, project_members_attributes: project_members_attributes )
   end
 
 end

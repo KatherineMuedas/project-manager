@@ -1,8 +1,10 @@
 class Project < ActiveRecord::Base
   has_many :tasks, dependent: :destroy
   belongs_to :user
+  has_many :project_members
   has_many :users, through: :project_members
   accepts_nested_attributes_for :tasks, reject_if: proc { |attributes| attributes['name'].blank? }, allow_destroy: true
+  accepts_nested_attributes_for :project_members  
   validates :name, :description, :due_date_at, presence: true
   
   validates_length_of :description, minimum: 10, too_short: 'please enter at least 10 characters'

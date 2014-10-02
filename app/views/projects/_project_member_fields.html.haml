@@ -1,0 +1,5 @@
+.nested-fields
+  .form-group.member.small-8.small-centered.columns
+    = f.collection_select :user_id, User.all, :id, :name 
+    %br/
+    = link_to_remove_association "Remove member", f, class: "btn btn-danger" 

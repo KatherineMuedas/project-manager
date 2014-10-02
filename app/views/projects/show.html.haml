@@ -3,6 +3,10 @@
   %p= @project.description
   %h5 Due Date:  
   %p= @project.due_date_at.strftime("%e %B %Y")
+  %h3 Members:
+  - @project_members.each do |member|
+    %h4=member.user.name
+  
   %h3 Tasks:
   - @tasks.each do |task|
     %h4

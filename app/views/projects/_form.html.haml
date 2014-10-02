@@ -10,6 +10,11 @@
     .form-group.name.small-8.small-centered.columns
       = f.input :due_date_at, label: 'Project Due Date (in UTC):', minute_step: 15, default: 1.week.from_now, order: [:month, :day, :year], start_year: Time.now.year 
       %br/
+    #project_members
+      = f.simple_fields_for :project_members do |project_member|
+        =render 'project_member_fields', f: project_member
+      .links
+        = link_to_add_association 'Add a member', f, :project_members, class: 'btn btn-primary'  
     %h3.text-center Tasks
     #tasks
       = f.simple_fields_for :tasks do |task|
